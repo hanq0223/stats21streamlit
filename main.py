@@ -38,13 +38,13 @@ if pd.api.types.is_numeric_dtype(data_col):
     st.table(data_col.describe())
     #sns.distplot(a = data_col)
     fig, ax = plt.subplots()
-    ax.hist(data_col, bins=20)
+    ax.hist(data_col, bins=20, color = 'red')
     st.pyplot(fig)
 else:
     prop = data_col.value_counts(normalize=True)
     st.write(prop)
     fig2, ax2 = plt.subplots()
-    prop.plot(kind='bar', ax = ax2)
+    prop.plot(kind='bar', ax = ax2 ,color = 'purple')
     st.pyplot(fig2)
     
 
