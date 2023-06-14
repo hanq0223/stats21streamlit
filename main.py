@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 
 uploaded_file = st.file_uploader("Choose a file")
@@ -36,7 +35,6 @@ data_col = data[selected_col]
 st.write(selected_col, ":")
 if pd.api.types.is_numeric_dtype(data_col):
     st.table(data_col.describe())
-    #sns.distplot(a = data_col)
     fig, ax = plt.subplots()
     ax.hist(data_col, bins=20, color = 'red')
     st.pyplot(fig)
