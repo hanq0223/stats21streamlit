@@ -19,12 +19,38 @@ if web_apps == "Exploratory Data Analysis":
     if show_df:
       st.write(df)
 
+    shape = df.shape
+    row_count = shape[0]
+    col_count = shape[1]
+
+    st.write("number of rows:", row_count)
+    st.write("number of columns:", col_count)
+
+    numeric_count = 0
+    for column in df.columns:
+      if pd.api.types.is_numeric_dtype(df[column]):
+          numeric_count += 1
+
+
+    categorical_count = 0
+    for column in df.columns:
+        if pd.api.types.is_string_dtype(df[column]):
+          categorical_count += 1
+    
+    
+    st.write("number of numeric variable:", numeric_count)
+    st.write("number of categorical variable:", categorical_count)
+
     column_type = st.sidebar.selectbox('Select Data Type',
                                        ("Numerical", "Categorical", "Bool", "Date"))
+    
+
 
     if column_type == "Numerical":
       numerical_column = st.sidebar.selectbox(
           'Select a Column', df.select_dtypes(include=['int64', 'float64']).columns)
+      
+      st.table(df[numerical_column].describe())
 
       # histogram
       choose_color = st.color_picker('Pick a Color', "#69b3a2")
@@ -59,6 +85,9 @@ if web_apps == "Exploratory Data Analysis":
     if column_type == "Categorical":
       categorical_column = st.sidebar.selectbox(
           'Select a Column', df.select_dtypes(exclude=['int64', 'float64']).columns)
+
+      prop = df[categorical_column].value_counts(normalize=True)
+      st.write(prop)
 
       # histogram
       choose_color = st.color_picker('Pick a Color', "#69b3a2")
