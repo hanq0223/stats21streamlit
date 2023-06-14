@@ -1,0 +1,5 @@
+numpy >= 1.23.5
+sandas >= 1.4.4
+streamlit >= 1.22.0
+matplotlib >= 3.5.2
+seaboard >= 0.11.2
